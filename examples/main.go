@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/oskov/cambridge-dictionary-parser/parser"
 	"log"
 )
 
 func main() {
 	// Example usage with default settings
-	parser := NewDictionaryParser()
+	parser := parser.NewDictionaryParser()
 	wordData, err := parser.ParseWord("example")
 	if err != nil {
 		log.Fatalf("Error: %v", err)

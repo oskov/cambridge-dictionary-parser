@@ -1,2 +1,2 @@
 /testdata
-parser_test.go
+/parser/parser_test.go
