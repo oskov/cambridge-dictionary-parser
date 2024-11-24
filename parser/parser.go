@@ -33,10 +33,6 @@ type Option func(*DictionaryParser)
 func NewDictionaryParser(opts ...Option) *DictionaryParser {
 	// Create a default parser with default values
 	parser := &DictionaryParser{
-		collector: colly.NewCollector(
-			colly.AllowedDomains("dictionary.cambridge.org"),
-			colly.UserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"),
-		),
 		baseURL: "https://dictionary.cambridge.org/dictionary/english/",
 		logger:  &NullLogger{},
 	}
@@ -44,6 +40,13 @@ func NewDictionaryParser(opts ...Option) *DictionaryParser {
 	// Apply all options passed
 	for _, opt := range opts {
 		opt(parser)
+	}
+
+	if parser.collector == nil {
+		parser.collector = colly.NewCollector(
+			colly.AllowedDomains("dictionary.cambridge.org"),
+			colly.UserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"),
+		)
 	}
 
 	return parser
