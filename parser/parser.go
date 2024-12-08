@@ -89,6 +89,7 @@ func (dp *DictionaryParser) ParseWord(word string) (WordData, error) {
 		e.ForEach(".def-block", func(_ int, defBlock *colly.HTMLElement) {
 			definition := strings.TrimSpace(defBlock.ChildText(".def"))
 			if definition != "" {
+				definition = strings.TrimSuffix(definition, ":")
 				def := Definition{
 					Definition: definition,
 				}
